@@ -1,0 +1,198 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <div>
+    <img class='logo' width="40" alt="Angular Logo"
+      src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==" />
+    <span>Welcome Test-Crud-TeddySolution</span>
+  </div>
+  <div class="spacer"></div>
+  <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
+    <svg id="twitter-logo" height="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+      <rect width="400" height="400" fill="none" />
+      <path
+        d="M153.62,301.59c94.34,0,145.94-78.16,145.94-145.94,0-2.22,0-4.43-.15-6.63A104.36,104.36,0,0,0,325,122.47a102.38,102.38,0,0,1-29.46,8.07,51.47,51.47,0,0,0,22.55-28.37,102.79,102.79,0,0,1-32.57,12.45,51.34,51.34,0,0,0-87.41,46.78A145.62,145.62,0,0,1,92.4,107.81a51.33,51.33,0,0,0,15.88,68.47A50.91,50.91,0,0,1,85,169.86c0,.21,0,.43,0,.65a51.31,51.31,0,0,0,41.15,50.28,51.21,51.21,0,0,1-23.16.88,51.35,51.35,0,0,0,47.92,35.62,102.92,102.92,0,0,1-63.7,22A104.41,104.41,0,0,1,75,278.55a145.21,145.21,0,0,0,78.62,23"
+        fill="#fff" />
+    </svg>
+  </a>
+</div>
+<form class="form-pro">
+
+  <hr>
+  <div class="button-add">
+    <button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal" data-target="#myModal">Novos
+      produtos
+    </button>
+  </div>
+
+  <h2>Tabela de Cadratro</h2>
+  <div class="clearfix"></div>
+  <hr>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Preco</th>
+        <th>Link_Foto</th>
+        <th>Descricao</th>
+        <th></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let produto of produtos'>
+        <td>{{produto.nome}}</td>
+        <td>{{produto.marca}}</td>
+        <td>{{produto.modelo}}</td>
+        <td>R$ {{produto.preco}}</td>
+        <td><img src='{{produto.link_foto}}' alt=""></td>
+        <td>{{produto.descricao}}</td>
+
+        <td>
+          <button class="btn btn-outline-warning mb-1 btn-sm" type="button"
+            (click)='atualizarprodutos(produto._id)'>Atualizar</button>
+          {{"  "}}
+          <button class="btn btn-danger mb-1 btn-sm" type="button" data-toggle="modal" data-target="#myModalDelete"
+            (click)='removerprodutos(produto._id)'>Remover</button>
+        </td>
+
+      </tr>
+
+      <!-- The Modal para restritrar novos protudos -->
+      <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Novo registro de produtos</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Nome</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name='name' [(ngModel)]='formulario.nome'>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Marca</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name='marca' [(ngModel)]='formulario.marca'>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Modelo</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name='modelo' [(ngModel)]='formulario.modelo'>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Preco</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name='preco' [(ngModel)]='formulario.preco'>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Foto</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name='link_foto' [(ngModel)]='formulario.link_foto'>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Descricao</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name='descricao' [(ngModel)]='formulario.descricao'>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" class="btn btn-default" (click)='cadastrar()'>Cadastrar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal"
+                data-target="#myModalEdit">Fechar</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal" id="myModalEdit">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Novo registro de produtos</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Nome</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name='name' [(ngModel)]='formulario.nome'>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Marca</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name='marca' [(ngModel)]='formulario.marca'>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Modelo</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name='modelo' [(ngModel)]='formulario.modelo'>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Preco</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name='preco' [(ngModel)]='formulario.preco'>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Foto</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name='link_foto' [(ngModel)]='formulario.link_foto'>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Descricao</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name='descricao' [(ngModel)]='formulario.descricao'>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" class="btn btn-default">Salvar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </tbody>
+  </table>
+</form>
